@@ -1,0 +1,27 @@
+.nav ul li:not(:first-child) {
+    margin-left: 10px;
+}
+
+.my-links-holder {
+    width: 90%;
+}
+
+@media screen and (min-width: 1000px) {
+
+    .login-register-form {
+        width: 500px;
+    }
+    .my-links-holder {
+        width: 80% !important;
+    }
+}
+
+.main-input label i {
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.main-input label {
+    display: flex;
+    align-items: center;
+}
