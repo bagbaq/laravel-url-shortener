@@ -1,4 +1,4 @@
-# 🔗 URL-SH - A Laravel URL Shortener Platform
+# 🔗 A Laravel URL Shortener Platform
 My first project using <b>Laravel</b> and <b>Tailwind!</b>
 
 
