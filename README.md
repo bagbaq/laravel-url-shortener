@@ -8,6 +8,7 @@ My first project using <b>Laravel</b> and <b>Tailwind!</b>
 - Create short links 4-64 characters long
 - Send e-mail to link owner once the link visited
 - Track the visit count of a link
+- Contact form
 
 ## 📝 Todo List
 

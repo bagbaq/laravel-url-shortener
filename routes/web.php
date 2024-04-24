@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UrlController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('', [MainController::class, 'home'])->name('home');
+Route::get('/', [MainController::class, 'home'])->name('home');
 
 Route::get('register', [UserController::class, 'register_create'])->middleware('guest')->name('register');
 Route::post('register', [UserController::class, 'register_store'])->middleware('guest');
