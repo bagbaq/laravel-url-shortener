@@ -28,16 +28,18 @@ class APIController extends Controller
     public function link_store(Request $request) {
         $data = request()->validate([
             'main_url' => 'required|url:http,https|max:65535',
-            'length' => 'required|integer|between:4,64'
+            'length' => 'required|integer|between:4,64',
+            'send_email' => 'required|boolean'
+        ], [
+            'send_email.boolean' => 'The send_email field must be 1 (true) or 0 (false).'
         ]);
 
         $data['shortened_url'] = unique_str($data['length'], 'urls', 'shortened_url');
-        $data['send_email'] = request()->send_email == 'on' ? true : false;
         Arr::pull($data, 'length');
 
-        request()->user()->links()->create($data);
+        $created = request()->user()->links()->create($data);
 
-        return response()->json(['message' => 'success', $data]);
+        return response()->json(['message' => 'success', 'link' => $created]);
     }
 
     public function link_read(Request $request, $id) {
@@ -48,6 +50,21 @@ class APIController extends Controller
         return $request->user()->links;
     }
 
+    public function link_update(Request $request, $id) {
+        $ownership = Url::where('id', $id)->where('user_id', $request->user()->id)->count();
+
+        if (!$ownership) return ['message' => 'Link is not owned or id not found'];
+
+        $data = request()->validate([
+            'main_url' => 'required_without:send_email|url:http,https|max:65535',
+            'send_email' => 'required_without:main_url|boolean'
+        ], [
+            'send_email.boolean' => 'The send_email field must be 1 (true) or 0 (false).'
+        ]);
+
+        return Url::whereId($id)->update($data) == true ? ['message' => 'success'] : ['message' => 'Link couldn\'t updated'];
+    }
+
     public function link_destroy(Request $request, $id) {
         $ownership = Url::where('id', $id)->where('user_id', $request->user()->id)->count();
 
@@ -56,13 +73,4 @@ class APIController extends Controller
         return Url::destroy($id) == true ? ['message' => 'success'] : ['message' => 'Link id not found'];
     }
 
-    public function link_update(Request $request, $id) {
-        $ownership = Url::where('id', $id)->where('user_id', $request->user()->id)->count();
-
-        if (!$ownership) return ['message' => 'Link is not owned or id not found'];
-
-        $data = request()->validate(['main_url' => 'required|url:http,https|max:65535']);
-
-        return Url::whereId($id)->update($data) == true ? ['message' => 'success'] : ['message' => 'Link couldn\'t updated'];
-    }
 }
