@@ -33,6 +33,11 @@
                                 My Links
                             </a>
                         </li>
+                        <li class="mx-3">
+                            <a href="{{ url('settings') }}" class="hover:text-blue-500 hover:underline transition" title="Account Settings">
+                                Account Settings
+                            </a>
+                        </li>
                         <li>
                             <form action="{{ url('log-out') }}" method="POST" class="m-0">
                                 @csrf

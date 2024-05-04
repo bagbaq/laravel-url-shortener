@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Url;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -77,5 +79,30 @@ class UserController extends Controller
         request()->user()->links()->create($data);
 
         return redirect()->route('my-links')->with('notification', 'New link has been added');
+    }
+
+    public function settings_create() {
+        return view('user.settings');
+    }
+
+    public function settings_update() {
+        $data = request()->validate([
+            'username' => [
+                'required',
+                'min:3',
+                'max:255',
+                Rule::unique('users')->ignore(request()->user()->id, 'id')
+            ],
+            'email'    => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore(request()->user()->id, 'id')
+            ]
+        ]);
+
+        request()->user()->update($data);
+
+        return back()->with('notification', 'Your settings successfully saved');
     }
 }

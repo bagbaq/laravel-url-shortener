@@ -19,6 +19,9 @@ Route::get('new-link', [UserController::class, 'new_link_create'])->middleware('
 Route::post('new-link', [UserController::class, 'new_link_store'])->middleware('auth');
 Route::delete('delete-link/{url:id}', [UrlController::class, 'destroy'])->middleware('auth');
 
+Route::get('settings', [UserController::class, 'settings_create'])->middleware('auth')->name('settings');
+Route::put('settings', [UserController::class, 'settings_update'])->middleware('auth');
+
 Route::get('contact', [MainController::class, 'contact_create']);
 Route::post('contact', [MainController::class, 'contact_store']);
 
