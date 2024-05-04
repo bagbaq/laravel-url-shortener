@@ -71,7 +71,6 @@ Authorization: Bearer Token (The token you got from setup below)
 
 - Make admin panel for managing links, users and general settings of the site
 - Beautify the front-end
-- Make user settings section
 - Create QR-Code for short link
 - Protect short links with password
 
