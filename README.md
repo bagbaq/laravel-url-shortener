@@ -10,6 +10,7 @@ My first project using <b>Laravel</b> and <b>Tailwind!</b>
 - Track the visit count of a link
 - Contact form
 - API for listing, creating, updating and destroying links
+- Admin Panel
 
 ## API Usage
 Authorization: Bearer Token (The token you got from setup below)
@@ -69,7 +70,6 @@ Authorization: Bearer Token (The token you got from setup below)
 
 ## 📝 Todo List
 
-- Make admin panel for managing links, users and general settings of the site
 - Beautify the front-end
 - Create QR-Code for short link
 - Protect short links with password
