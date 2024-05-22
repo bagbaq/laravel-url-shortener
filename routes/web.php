@@ -3,6 +3,7 @@
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UrlController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'home'])->name('home');
@@ -32,6 +33,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('delete-link/{url:id}', [UrlController::class, 'destroy'])->where(['id' => '[0-9]+'])->missing(function () {
         return redirect()->back();
     });
+});
+
+Route::middleware('admin')->group(function () {
+   Route::controller(AdminController::class)->group(function () {
+        Route::get('admin', 'home_create')->name('admin-dashboard');
+
+        /* Users */
+        Route::get('admin/users', 'users_create')->name('admin-users');
+        Route::get('admin/users/{id}', 'user_edit_create');
+        Route::put('admin/users/{id}', 'user_edit_update');
+        Route::delete('admin/users/{id}', 'user_destroy');
+
+        /* Links */
+        Route::get('admin/links', 'links_create')->name('admin-links');
+        Route::get('admin/links/{id}', 'link_edit_create');
+        Route::put('admin/links/{id}', 'link_edit_update');
+        Route::delete('admin/links/{id}', 'link_destroy');
+   });
 });
 
 Route::get('contact', [MainController::class, 'contact_create']);

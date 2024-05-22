@@ -7,7 +7,7 @@
     <h1 class="font-bold text-5xl text-white w-full text-center mt-5">My Links</h1>
     <div class="w-full h-screen flex justify-center items-center">
         <div class="bg-gray-800 border-2 border-lime-500 shadow-md flex flex-col my-links-holder m-5 md:m-0 h-2/4 justify-center items-center rounded-md overflow-y-auto">
-            <div class="flex flex-col max-w-full md:w-4/5 p-2 md:p-0">
+            <div class="flex flex-col max-w-full md:w-4/5 p-2 md:p-0 h-4/5">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-0">
                         <div class="overflow-hidden rounded-lg">

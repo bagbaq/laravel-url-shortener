@@ -11,6 +11,7 @@ class Url extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $dates = ['created_at'];
 
     protected $fillable = [
         'user_id',

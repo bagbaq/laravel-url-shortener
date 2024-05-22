@@ -18,7 +18,7 @@
     <div class="header w-full bg-gray-800">
         <div class="nav w-full p-5">
             <ul class="flex text-white font-semibold justify-between">
-                <a href="{{ url('') }}" title="URL-Shortener">
+                <a href="{{ url('') }}" title="URL-Shortener" class="hidden sm:block">
                     <img class="" src="{{ asset('media/logo.png') }}" alt="Logo">
                 </a>
                 @auth
@@ -44,6 +44,13 @@
                                 <button type="submit" class="font-semibold hover:text-blue-500 hover:underline transition">Log Out</button>
                             </form>
                         </li>
+                        @if (Auth::user()->admin == 1)
+                        <li class="mx-5">
+                            <a href="{{ url('admin/') }}" class="text-green-800 text-center block md:inline font-bold bg-green-400 md:mx-5 md:p-3 rounded-xl border border-green-800" title="Admin Panel">
+                                Admin Panel
+                            </a>
+                        </li>
+                        @endif
                     </div>
                 @else
                     <div class="flex">
